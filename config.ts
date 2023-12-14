@@ -1,0 +1,1 @@
+export const baseUrl = "https://mern-interview-test-backend-sigma.vercel.app"
