@@ -1,4 +1,3 @@
-// DrawingCard.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Stage, Layer, Line, Rect, Circle } from 'react-konva';
@@ -14,9 +13,7 @@ const DrawingCard: React.FC<DrawingCardProps> = ({ drawing }) => {
   const { title } = drawing;
   return (
     <Link to={`/drawing/${drawing._id}`}>
-      <div
-        className='ring-2 ring-purple-500 m-2 p-2 rounded-lg shadow-lg'
-      >
+      <div className='ring-0 hover:scale-105 duration-300 hover:ring-2 ring-purple-500 m-2 p-2 rounded-lg shadow-lg bg-white'>
         <h2 className='text-lg font-semibold'>{title}</h2>
         <Stage width={400} height={250}>
           <Layer>

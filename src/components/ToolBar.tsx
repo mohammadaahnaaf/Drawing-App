@@ -1,4 +1,4 @@
-import { FC, LegacyRef, useContext } from 'react';
+import React, { FC, LegacyRef, useContext } from 'react';
 import Swal from 'sweetalert2';
 import { baseUrl } from '../../config';
 import { AppContext } from '@/App';
@@ -17,6 +17,7 @@ interface ToolBarProps {
 const ToolBar: FC<ToolBarProps> = ({ titleRef, setTool, saveDrawing, loading, drawingId, setLoading }) => {
     const { setDrawings } = useContext(AppContext);
     const navigate = useNavigate();
+    const [current, setCurrent] = React.useState<string>('pen')
     const handleDelete = async () => {
         Swal.fire({
             title: "Are you sure?",
@@ -51,6 +52,12 @@ const ToolBar: FC<ToolBarProps> = ({ titleRef, setTool, saveDrawing, loading, dr
             }
         });
     }
+
+    function handleTool(t: string) {
+        setTool(t)
+        setCurrent(t)
+    }
+
     return (
         <div className='bg-gradient-to-tr from-pink-100 to-green-100'>
             <div className="w-full flex max-w-7xl mx-auto justify-between px-5 items-center py-2 gap-2"  >
@@ -69,13 +76,15 @@ const ToolBar: FC<ToolBarProps> = ({ titleRef, setTool, saveDrawing, loading, dr
                 {/* tool buttons */}
                 <div className='flex gap-10 justify-center w-full'>
 
-                    <button onClick={() => setTool("pen")} title='pen'>
+                    <button className={current === 'pen' ? "bg-purple-300 p-2 rounded-md" : "p-2 rounded-md hover:bg-purple-300 duration-300"} onClick={() => handleTool("pen")} title='pen'>
                         <img src='/pen.svg' height={30} width={30} />
                     </button>
-                    <button onClick={() => setTool("circle")} title='circle'>
+
+                    <button className={current === 'circle' ? "bg-purple-300 p-2 rounded-md" : "p-2 rounded-md hover:bg-purple-300 duration-300"} onClick={() => handleTool("circle")} title='circle'>
                         <img src='/circle.svg' height={30} width={30} />
                     </button>
-                    <button onClick={() => setTool("rectangle")} title='rectangle'>
+
+                    <button className={current === 'rectangle' ? "bg-purple-300 p-2 rounded-md" : "p-2 rounded-md hover:bg-purple-300 duration-300"} onClick={() => handleTool("rectangle")} title='rectangle'>
                         <img src='/square.svg' height={30} width={30} />
                     </button>
                 </div>
